@@ -1,0 +1,66 @@
+@import '../../constants';
+
+$radius: 16px;
+$selected: darken($background, 20%);
+
+.container {
+  width: 100%;
+  max-width: 700px;
+  margin: 32px 48px;
+  max-height: 600px;
+  height: 80%;
+  overflow: auto;
+}
+
+.tabsContainer {
+  animation: fade-in 0.15s;
+  display: flex;
+  flex-direction: column;
+  background-color: $background;
+  border-radius: $radius;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.tab {
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  cursor: pointer;
+
+  &.selected,
+  &:hover {
+    background-color: $selected;
+  }
+}
+
+.favicon {
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+}
+
+.tabTitle {
+  white-space: nowrap;
+  font-size: 16px;
+  color: $material-87;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.input {
+  width: 100%;
+  padding: 8px 16px;
+  outline: 0;
+  border: 0;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.87);
+}
