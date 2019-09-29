@@ -1,12 +1,18 @@
 import React from 'react'
 const css = require('./styles.scss')
 
-interface Props {}
+interface Props {
+  onClick?: () => void
+}
 
 export default class Overlay extends React.Component<Props> {
   render() {
-    const { children } = this.props
+    const { children, onClick } = this.props
 
-    return <div className={css.container}>{children}</div>
+    return (
+      <div onClick={() => onClick && onClick()} className={css.container}>
+        {children}
+      </div>
+    )
   }
 }

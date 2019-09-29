@@ -29,8 +29,7 @@ $selected: darken($background, 20%);
   padding: 8px 16px;
   cursor: pointer;
 
-  &.selected,
-  &:hover {
+  &.selected {
     background-color: $selected;
   }
 }

@@ -23,7 +23,6 @@ chrome.runtime.onMessage.addListener(
         break
       }
       case 'highlight': {
-        console.log(action)
         if (action.tab.id) {
           chrome.tabs.highlight({
             tabs: action.tab.index,

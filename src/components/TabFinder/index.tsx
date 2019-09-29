@@ -36,17 +36,21 @@ export default class TabFinder extends React.Component<Props, State> {
     const { active } = this.props
     const justActivated = !prevProps.active && active
 
-    if (justActivated) this.updateTabsList()
+    if (justActivated) {
+      this.setState({ currentSelection: 0, textValue: '' })
+
+      this.updateTabsList()
+    }
   }
 
   render() {
-    const { active } = this.props
+    const { active, toggleActive } = this.props
 
     if (!active) return null
 
     return (
-      <Overlay>
-        <div className={css.container}>
+      <Overlay onClick={toggleActive}>
+        <div className={css.container} onClick={e => e.stopPropagation()}>
           <div className={css.tabsContainer}>
             {this.renderSearch()}
             <Fragment>{this.tabs().map(this.renderTab)}</Fragment>
@@ -79,7 +83,12 @@ export default class TabFinder extends React.Component<Props, State> {
     if (currentSelection === index) classes.push(css.selected)
 
     return (
-      <div key={tab.id} className={classes.join(' ')}>
+      <div
+        key={tab.id}
+        className={classes.join(' ')}
+        onMouseOver={() => this.setState({ currentSelection: index })}
+        onClick={() => this.selectTab()}
+      >
         <img className={css.favicon} src={tab.favIconUrl} />
         <div className={css.tabTitle}> {tab.title} </div>
       </div>
@@ -134,7 +143,10 @@ export default class TabFinder extends React.Component<Props, State> {
   }
 
   selectTab() {
+    const { toggleActive, active } = this.props
     const { currentSelection } = this.state
+
+    if (active) toggleActive()
 
     chrome.runtime.sendMessage({
       type: 'highlight',
