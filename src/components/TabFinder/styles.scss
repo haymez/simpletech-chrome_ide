@@ -4,22 +4,22 @@ $radius: 16px;
 $selected: darken($background, 20%);
 
 .container {
+  animation: fade-in 0.15s;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 700px;
   margin: 32px 48px;
   max-height: 600px;
-  height: 80%;
-  overflow: auto;
+  overflow: hidden;
 }
 
-.tabsContainer {
-  animation: fade-in 0.15s;
-  display: flex;
-  flex-direction: column;
-  background-color: $background;
-  border-radius: $radius;
+.tabs {
+  flex-shrink: 1;
   overflow-x: hidden;
   overflow-y: auto;
+  background-color: $background;
+  border-radius: 0 0 $radius $radius;
 }
 
 .tab {
@@ -28,20 +28,17 @@ $selected: darken($background, 20%);
   align-items: center;
   padding: 8px 16px;
   cursor: pointer;
+  width: 100%;
 
   &.selected {
     background-color: $selected;
   }
 }
 
-.favicon {
-  width: 24px;
-  height: 24px;
-  margin-right: 16px;
-}
-
 .tabTitle {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 16px;
   color: $material-87;
 }
@@ -62,4 +59,5 @@ $selected: darken($background, 20%);
   border: 0;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.87);
+  border-radius: $radius $radius 0 0;
 }

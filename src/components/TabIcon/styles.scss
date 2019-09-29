@@ -1,0 +1,12 @@
+@import '../../constants';
+
+.container {
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+  border-radius: 50%;
+
+  &.errored {
+    background-color: $white;
+  }
+}

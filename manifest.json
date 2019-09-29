@@ -16,6 +16,6 @@
       "js": ["content_script.js"]
     }
   ],
-  "web_accessible_resources": ["index.html"],
+  "web_accessible_resources": ["index.html", "assets/*"],
   "manifest_version": 2
 }

@@ -3,7 +3,9 @@
 .container {
   animation: fade-in 0.15s;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   bottom: 0;

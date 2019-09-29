@@ -39,9 +39,12 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin({ cleanAfterEveryBuildPatterns: ['dist/*'] }),
-    new CopyWebpackPlugin(['src/assets', 'manifest.json'], {
-      copyUnmodified: true,
-    }),
+    new CopyWebpackPlugin(
+      [{ from: 'src/assets', to: 'assets' }, 'manifest.json'],
+      {
+        copyUnmodified: true,
+      },
+    ),
     new HtmlWebpackPlugin({
       title: 'Chrome IDE',
       template: 'src/html/index.ejs',

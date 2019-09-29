@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Overlay from 'components/Overlay/index'
+import TabIcon from 'components/TabIcon/index'
 const css = require('./styles.scss')
 
 interface Props {
@@ -51,10 +52,8 @@ export default class TabFinder extends React.Component<Props, State> {
     return (
       <Overlay onClick={toggleActive}>
         <div className={css.container} onClick={e => e.stopPropagation()}>
-          <div className={css.tabsContainer}>
-            {this.renderSearch()}
-            <Fragment>{this.tabs().map(this.renderTab)}</Fragment>
-          </div>
+          {this.renderSearch()}
+          <div className={css.tabs}>{this.tabs().map(this.renderTab)}</div>
         </div>
       </Overlay>
     )
@@ -89,8 +88,10 @@ export default class TabFinder extends React.Component<Props, State> {
         onMouseOver={() => this.setState({ currentSelection: index })}
         onClick={() => this.selectTab()}
       >
-        <img className={css.favicon} src={tab.favIconUrl} />
-        <div className={css.tabTitle}> {tab.title} </div>
+        <TabIcon imageURL={tab.favIconUrl} />
+        <div title={tab.title} className={css.tabTitle}>
+          {tab.title}
+        </div>
       </div>
     )
   }
