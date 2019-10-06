@@ -1,5 +1,12 @@
 import React from 'react'
 import TabFinder from 'components/TabFinder/index'
+import {
+  getLocalStorage,
+  setLightMode,
+  setDarkMode,
+  lightModeStorageKey,
+} from 'lib/extension'
+import { BackgroundAction } from 'background'
 const css = require('./styles.scss')
 
 interface Props {}
@@ -18,6 +25,16 @@ export default class App extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+    getLocalStorage<boolean>(lightModeStorageKey).then(val => {
+      val ? setLightMode() : setDarkMode()
+    })
+
+    chrome.runtime.onMessage.addListener((message: BackgroundAction) => {
+      if (message.type === 'lightMode') {
+        message.value ? setLightMode() : setDarkMode()
+      }
+    })
+
     document.addEventListener('keydown', this.keydownHandler)
   }
 

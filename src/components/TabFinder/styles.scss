@@ -1,7 +1,6 @@
 @import '../../constants';
 
-$radius: 16px;
-$selected: darken($background, 20%);
+$radius: 4px;
 
 .container {
   animation: fade-in 0.15s;
@@ -12,35 +11,38 @@ $selected: darken($background, 20%);
   margin: 32px 48px;
   max-height: 600px;
   overflow: hidden;
+  box-shadow: 0 0 20px $material-54-dark;
 }
 
 .tabs {
   flex-shrink: 1;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: $background;
+
   border-radius: 0 0 $radius $radius;
 }
 
 .tab {
-  transition: all 0.15s ease;
+  transition: all 0.3s;
   display: flex;
   align-items: center;
   padding: 8px 16px;
   cursor: pointer;
   width: 100%;
+  background-color: var(--tabFinderBackground);
 
   &.selected {
-    background-color: $selected;
+    background-color: var(--tabFinderBackgroundDarker);
   }
 }
 
 .tabTitle {
+  transition: all 0.3s;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 16px;
-  color: $material-87;
+  color: var(--tabFinderFontColor);
 }
 
 @keyframes fade-in {
@@ -57,7 +59,7 @@ $selected: darken($background, 20%);
   padding: 8px 16px;
   outline: 0;
   border: 0;
-  font-size: 16px;
+  font-size: 18px;
   color: rgba(0, 0, 0, 0.87);
   border-radius: $radius $radius 0 0;
 }

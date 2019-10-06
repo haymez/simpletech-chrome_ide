@@ -6,8 +6,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
-    background: path.join(__dirname, './src/background.ts'),
-    content_script: path.join(__dirname, './src/content_script.tsx'),
+    background: path.join(__dirname, './src/background'),
+    content_script: path.join(__dirname, './src/content_script'),
+    popup: path.join(__dirname, './src/popup'),
   },
   output: {
     filename: '[name].js',
@@ -47,7 +48,9 @@ module.exports = {
     ),
     new HtmlWebpackPlugin({
       title: 'Chrome IDE',
-      template: 'src/html/index.ejs',
+      template: 'src/html/popup.ejs',
+      chunks: ['popup'],
+      filename: 'popup.html',
     }),
   ],
 }

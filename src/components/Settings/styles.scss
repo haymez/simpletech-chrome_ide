@@ -1,0 +1,53 @@
+@import '../../constants';
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  transition: all 0.25s;
+  width: 400px;
+  background-color: $background-dark;
+  color: $material-87;
+  padding: 16px;
+
+  &.lightMode {
+    background-color: $background-light;
+    color: $material-87-dark;
+  }
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 16px;
+  padding: 16px 0;
+  text-align: center;
+  border-bottom: 1px solid $material-12-dark;
+}
+
+.rows {
+  display: block;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  padding: 8px 16px;
+}
+
+.label {
+  font-size: 16px;
+  margin-right: 16px;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flexTitle {
+  font-size: 18px;
+  margin: 0 8px;
+}

@@ -7,3 +7,12 @@ export function getTabs(): Promise<chrome.tabs.Tab[]> {
     })
   })
 }
+
+/** Sends message to all tabs */
+export function carpetBomb(message: unknown) {
+  chrome.tabs.query({}, tabs => {
+    tabs.forEach(tab => {
+      if (tab.id) chrome.tabs.sendMessage(tab.id, message)
+    })
+  })
+}

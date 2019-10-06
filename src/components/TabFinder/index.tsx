@@ -111,7 +111,7 @@ export default class TabFinder extends React.Component<Props, State> {
   }
 
   handleTextValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ textValue: e.currentTarget.value })
+    this.setState({ textValue: e.currentTarget.value, currentSelection: 0 })
   }
 
   keydownHandler = (e: KeyboardEvent) => {

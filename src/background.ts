@@ -1,4 +1,5 @@
-import { getTabs } from 'lib/background'
+import { getTabs, carpetBomb } from 'lib/background'
+import { lightModeStorageKey } from 'lib/extension'
 
 interface GetTabs {
   type: 'tabs'
@@ -9,29 +10,37 @@ interface HighlightAction {
   tab: chrome.tabs.Tab
 }
 
-type Action = GetTabs | HighlightAction
+interface SetLightMode {
+  type: 'lightMode'
+  value: boolean
+}
+
+export type BackgroundAction = GetTabs | HighlightAction | SetLightMode
 
 chrome.runtime.onMessage.addListener(
   (
-    action: Action,
+    action: BackgroundAction,
     _sender: chrome.runtime.MessageSender,
     sendResponse: (response: any) => void,
   ) => {
     switch (action.type) {
-      case 'tabs': {
+      case 'tabs':
         getTabs().then(sendResponse)
-        break
-      }
-      case 'highlight': {
+
+        return true
+      case 'highlight':
         if (action.tab.id) {
           chrome.tabs.highlight({
             tabs: action.tab.index,
           })
         }
-        break
-      }
-    }
 
-    return true
+        return false
+      case 'lightMode':
+        chrome.storage.local.set({ [lightModeStorageKey]: action.value })
+        carpetBomb(action)
+
+        return false
+    }
   },
 )

@@ -1,0 +1,30 @@
+@import '../../constants';
+
+$togglerWidth: 4px;
+
+.container {
+  position: relative;
+  border-radius: 32px;
+  background-color: $blue;
+  height: 18px;
+  width: 40px;
+  padding: 3px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &.active .toggler {
+    left: calc(100% - #{8px + $togglerWidth});
+  }
+}
+
+.toggler {
+  transition: all 0.25s;
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: calc(0% + 8px);
+  width: $togglerWidth;
+  border-radius: 4px;
+  background-color: $white;
+}
