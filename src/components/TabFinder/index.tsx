@@ -15,6 +15,8 @@ interface State {
 }
 
 export default class TabFinder extends React.Component<Props, State> {
+  tabsRef = React.createRef<HTMLDivElement>()
+
   constructor(props: Props) {
     super(props)
 
@@ -53,7 +55,9 @@ export default class TabFinder extends React.Component<Props, State> {
       <Overlay onClick={toggleActive}>
         <div className={css.container} onClick={e => e.stopPropagation()}>
           {this.renderSearch()}
-          <div className={css.tabs}>{this.tabs().map(this.renderTab)}</div>
+          <div ref={this.tabsRef} className={css.tabs}>
+            {this.tabs().map(this.renderTab)}
+          </div>
         </div>
       </Overlay>
     )
@@ -83,6 +87,7 @@ export default class TabFinder extends React.Component<Props, State> {
 
     return (
       <div
+        id={`index-${index}`}
         key={tab.id}
         className={classes.join(' ')}
         onMouseOver={() => this.setState({ currentSelection: index })}
@@ -129,18 +134,24 @@ export default class TabFinder extends React.Component<Props, State> {
     const { currentSelection } = this.state
     const newValue = currentSelection + 1
 
-    this.setState({
-      currentSelection: newValue >= this.tabs().length ? 0 : newValue,
-    })
+    this.setState(
+      {
+        currentSelection: newValue >= this.tabs().length ? 0 : newValue,
+      },
+      () => this.scrollIntoView(),
+    )
   }
 
   arrowUp() {
     const { currentSelection } = this.state
     const newValue = currentSelection - 1
 
-    this.setState({
-      currentSelection: newValue < 0 ? this.tabs().length - 1 : newValue,
-    })
+    this.setState(
+      {
+        currentSelection: newValue < 0 ? this.tabs().length - 1 : newValue,
+      },
+      () => this.scrollIntoView(),
+    )
   }
 
   selectTab() {
@@ -153,5 +164,28 @@ export default class TabFinder extends React.Component<Props, State> {
       type: 'highlight',
       tab: this.tabs()[currentSelection],
     })
+  }
+
+  scrollIntoView() {
+    const { currentSelection } = this.state
+    const ref = this.tabsRef.current
+    const el = ref && ref.querySelector(`#index-${currentSelection}`)
+
+    if (!ref || !el) return
+
+    if (this.needsToScroll(ref, el)) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }
+  }
+
+  needsToScroll(container: HTMLDivElement, element: Element) {
+    const parentRect = container.getBoundingClientRect()
+    const elRect = element.getBoundingClientRect()
+    const parentTop = parentRect.top
+    const parentBottom = parentRect.bottom
+    const elTop = elRect.top
+    const elBottom = elRect.bottom
+
+    return elBottom > parentBottom || elTop < parentTop
   }
 }
