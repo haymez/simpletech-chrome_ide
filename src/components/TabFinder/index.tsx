@@ -1,6 +1,7 @@
 import React from 'react'
 import Overlay from 'components/Overlay/index'
 import TabIcon from 'components/TabIcon/index'
+import { filterTabs } from 'lib/extension'
 const css = require('./styles.scss')
 
 interface Props {
@@ -104,9 +105,8 @@ export default class TabFinder extends React.Component<Props, State> {
   // Functions
   tabs() {
     const { tabs, textValue } = this.state
-    const regex = new RegExp(textValue.split('').join('.*'), 'i')
 
-    return tabs.filter(tab => !textValue || regex.test(tab.title || ''))
+    return filterTabs(tabs, textValue)
   }
 
   updateTabsList() {

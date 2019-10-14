@@ -59,6 +59,10 @@ export default class App extends React.Component<Props, State> {
   }
 
   keydownHandler = (e: KeyboardEvent) => {
-    if (e.shiftKey && e.ctrlKey && e.key === 'H') this.toggleActive()
+    if (e.shiftKey && e.ctrlKey && e.key === 'H') {
+      e.stopPropagation()
+      e.preventDefault()
+      this.toggleActive()
+    }
   }
 }
