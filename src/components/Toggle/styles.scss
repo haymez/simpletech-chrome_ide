@@ -5,7 +5,7 @@ $togglerWidth: 12px;
 .container {
   position: relative;
   border-radius: 32px;
-  background-color: $material-54-dark;
+  background: linear-gradient(90deg, $purple, lighten($purple, 30%));
   height: 18px;
   width: 40px;
   padding: 3px;
