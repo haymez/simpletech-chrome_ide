@@ -5,6 +5,7 @@
   height: 24px;
   margin-right: 16px;
   border-radius: 50%;
+  filter: drop-shadow(0 0 3px $material-34);
 
   &.errored {
     background-color: $white;
