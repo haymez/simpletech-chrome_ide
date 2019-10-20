@@ -9,7 +9,8 @@
   },
   "browser_action": {
     "default_title": "Chrome IDE",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": "./assets/icon.png"
   },
   "content_scripts": [
     {
